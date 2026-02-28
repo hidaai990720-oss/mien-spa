@@ -11,7 +11,3 @@ cat > vercel.json << 'EOF'
   ]
 }
 EOF
-
-git add vercel.json
-git commit -m "fix: add vercel config"
-git push origin master
