@@ -1,0 +1,17 @@
+cd ~/mypj/verdure-backend
+
+cat > vercel.json << 'EOF'
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
+EOF
+
+git add vercel.json
+git commit -m "fix: add vercel config"
+git push origin master
