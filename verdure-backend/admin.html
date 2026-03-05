@@ -707,39 +707,6 @@ body {
 /* Char counter */
 .char-count { font-size: 0.68rem; color: var(--muted); text-align: right; margin-top: 0.2rem; }
 
-/* Image upload zone */
-.img-upload-zone {
-  border: 2px dashed var(--border2);
-  border-radius: 8px;
-  padding: 1.75rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: var(--surface2);
-  min-height: 140px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.img-upload-zone:hover { border-color: var(--green); background: rgba(61,170,106,0.05); }
-.img-upload-zone.drag-over { border-color: var(--mint); background: rgba(61,170,106,0.1); transform: scale(1.01); }
-.img-upload-zone.has-image { padding: 0.5rem; border-style: solid; border-color: var(--green); cursor: default; }
-.spinner {
-  width: 28px; height: 28px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top-color: white; border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.upload-progress {
-  height: 3px; background: var(--border); border-radius: 100px;
-  margin-top: 0.5rem; overflow: hidden; display: none;
-}
-.upload-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--mint));
-  border-radius: 100px; width: 0%; transition: width 0.3s ease;
-}
-
 /* Empty state */
 .empty-state {
   text-align: center; padding: 4rem 2rem;
@@ -1107,7 +1074,7 @@ body {
         <div class="od-grid">
           <div class="od-section">
             <h4>Thông tin khách hàng</h4>
-            <div class="od-val" id="od-customer">Nguyễn Thị Lan<br>0901 234 567<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86eae7e8a8e8e1f3ffe3e8c6e3ebe7efeaa8e5e9eb">[email&#160;protected]</a></div>
+            <div class="od-val" id="od-customer">Nguyễn Thị Lan<br>0901 234 567<br>lan.nguyen@email.com</div>
           </div>
           <div class="od-section">
             <h4>Địa chỉ giao hàng</h4>
@@ -1218,54 +1185,22 @@ body {
           <textarea class="form-textarea" id="p-ingredients" placeholder="Aqua, Glycerin, Rosa Damascena..." style="min-height:80px;font-family:'DM Mono',monospace;font-size:0.8rem;"></textarea>
         </div>
         <div class="form-group full">
-          <label class="form-label">Hình ảnh sản phẩm</label>
-
-          <!-- Upload zone -->
-          <div class="img-upload-zone" id="img-upload-zone" onclick="document.getElementById('p-image-file').click()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
-            <!-- Preview -->
-            <div id="img-preview-wrap" style="display:none;position:relative;">
-              <img id="img-preview" src="" alt="preview" style="width:100%;max-height:220px;object-fit:cover;border-radius:6px;display:block;">
-              <button onclick="clearImage(event)" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;">✕</button>
-              <div id="img-upload-overlay" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.5);border-radius:6px;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
-                <div class="spinner"></div>
-                <span style="color:white;font-size:0.8rem;">Đang upload...</span>
-              </div>
-            </div>
-            <!-- Placeholder -->
-            <div id="img-placeholder">
-              <div style="font-size:2.5rem;margin-bottom:0.75rem;">🖼️</div>
-              <div style="font-size:0.85rem;color:var(--text);font-weight:500;margin-bottom:0.3rem;">Kéo thả ảnh vào đây</div>
-              <div style="font-size:0.75rem;color:var(--muted);">hoặc click để chọn từ máy tính</div>
-              <div style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;">JPG, PNG, WebP · Tối đa 5MB</div>
-            </div>
+          <label class="form-label">Hình ảnh sản phẩm (chọn icon đại diện)</label>
+          <div class="emoji-row" id="emoji-picker">
+            <div class="emoji-opt chosen" onclick="selectEmoji(this,'p-emoji','🌹')">🌹</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🌿')">🌿</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','💜')">💜</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🌼')">🌼</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🍵')">🍵</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🌻')">🌻</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🕯️')">🕯️</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🌊')">🌊</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🍋')">🍋</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','☕')">☕</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','💧')">💧</div>
+            <div class="emoji-opt" onclick="selectEmoji(this,'p-emoji','🌺')">🌺</div>
           </div>
-          <input type="file" id="p-image-file" accept="image/*" style="display:none" onchange="handleImageSelect(this)">
-
-          <!-- Cloudinary config (điền sau khi có tài khoản) -->
-          <div style="margin-top:0.75rem;padding:0.75rem 1rem;background:rgba(74,144,217,0.08);border:1px solid rgba(74,144,217,0.2);border-radius:6px;">
-            <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;">⚙️ Cloudinary Config</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
-              <div>
-                <div style="font-size:0.65rem;color:var(--muted);margin-bottom:0.2rem;">Cloud Name</div>
-                <input class="form-input" id="cloudinary-name" placeholder="your_cloud_name" style="font-size:0.78rem;font-family:'DM Mono',monospace;" oninput="saveCloudinaryConfig()">
-              </div>
-              <div>
-                <div style="font-size:0.65rem;color:var(--muted);margin-bottom:0.2rem;">Upload Preset (unsigned)</div>
-                <input class="form-input" id="cloudinary-preset" placeholder="mien_spa_preset" style="font-size:0.78rem;font-family:'DM Mono',monospace;" oninput="saveCloudinaryConfig()">
-              </div>
-            </div>
-            <div style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;">
-              💡 Tạo tại <span style="color:var(--blue)">cloudinary.com → Settings → Upload → Upload presets → Add unsigned preset</span>
-            </div>
-          </div>
-
-          <!-- URL thủ công (fallback) -->
-          <div style="margin-top:0.75rem;">
-            <div style="font-size:0.65rem;color:var(--muted);margin-bottom:0.3rem;letter-spacing:0.1em;text-transform:uppercase;">Hoặc dán URL ảnh trực tiếp</div>
-            <input class="form-input" id="p-image-url" placeholder="https://res.cloudinary.com/..." style="font-size:0.8rem;font-family:'DM Mono',monospace;" oninput="previewFromUrl(this.value)">
-          </div>
-
-          <input type="hidden" id="p-image-final" value="">
+          <input type="hidden" id="p-emoji" value="🌹">
         </div>
         <div class="form-group full">
           <label class="form-label">Tags</label>
@@ -1295,7 +1230,7 @@ body {
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toasts"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ═══ DATA ═══════════════════════════════════════════════════
 let products = [
   { id:1,  name:'Serum Hoa Hồng 24K',     cat:'duong-da', catLabel:'Dưỡng Da',    price:450000, sale:0,       stock:48,  icon:'🌹', active:true, featured:true  },
@@ -1372,15 +1307,12 @@ function renderProductsTable(data) {
   tbody.innerHTML = data.map((p, i) => {
     const stockCls = p.stock === 0 ? 'stock-out' : p.stock <= 5 ? 'stock-low' : 'stock-ok';
     const stockTxt = p.stock === 0 ? 'Hết hàng' : p.stock <= 5 ? `⚠ ${p.stock}` : p.stock;
-    const thumb = p.imageUrl
-      ? `<img src="${p.imageUrl}" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;">`
-      : `<div class="pt-thumb" style="background:linear-gradient(135deg,#1E2333,#2A3048)">${p.icon}</div>`;
     return `
       <tr>
         <td style="color:var(--muted);font-size:0.75rem;">${String(i+1).padStart(2,'0')}</td>
         <td>
           <div style="display:flex;align-items:center;gap:0.75rem;">
-            ${thumb}
+            <div class="pt-thumb" style="background:linear-gradient(135deg,#1E2333,#2A3048)">${p.icon}</div>
             <div>
               <div class="name">${p.name}</div>
               ${p.featured ? '<span style="font-size:0.65rem;color:var(--amber)">★ Nổi bật</span>' : ''}
@@ -1428,13 +1360,14 @@ function filterProducts(search, cat) {
 function openAddModal() {
   editingProductId = null;
   document.getElementById('modal-product-title').textContent = '➕ Thêm sản phẩm mới';
-  ['p-name','p-sku','p-price','p-sale','p-stock','p-weight','p-short-desc','p-desc','p-ingredients','p-tags','p-image-url','p-image-final']
-    .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  ['p-name','p-sku','p-price','p-sale','p-stock','p-weight','p-short-desc','p-desc','p-ingredients','p-tags']
+    .forEach(id => document.getElementById(id).value = '');
   document.getElementById('p-cat').value = '';
   document.getElementById('p-featured').checked = false;
   document.getElementById('p-active').checked = true;
-  clearImage();
-  loadCloudinaryConfig();
+  document.querySelectorAll('#emoji-picker .emoji-opt').forEach(e => e.classList.remove('chosen'));
+  document.querySelector('#emoji-picker .emoji-opt').classList.add('chosen');
+  document.getElementById('p-emoji').value = '🌹';
   openModal('product-modal');
 }
 
@@ -1450,15 +1383,11 @@ function editProduct(id) {
   document.getElementById('p-stock').value = p.stock;
   document.getElementById('p-featured').checked = p.featured;
   document.getElementById('p-active').checked   = p.active;
-  // Load existing image
-  if (p.imageUrl) {
-    document.getElementById('p-image-final').value = p.imageUrl;
-    document.getElementById('p-image-url').value   = p.imageUrl;
-    showPreview(p.imageUrl);
-  } else {
-    clearImage();
-  }
-  loadCloudinaryConfig();
+  document.getElementById('p-emoji').value = p.icon;
+  // set chosen emoji
+  document.querySelectorAll('#emoji-picker .emoji-opt').forEach(e => {
+    e.classList.toggle('chosen', e.textContent === p.icon);
+  });
   openModal('product-modal');
 }
 
@@ -1469,14 +1398,11 @@ function saveProduct() {
   if (!name || !cat || !price) { toast('Vui lòng điền đầy đủ thông tin bắt buộc.', 'error'); return; }
 
   const catLabels = { 'duong-da':'Dưỡng Da','body':'Body Care','mat-na':'Mặt Nạ','tay-da':'Tẩy Da Chết','tinh-dau':'Tinh Dầu','toner':'Toner' };
-  const imageUrl = document.getElementById('p-image-final').value || null;
-
   const data = {
     name, cat, catLabel: catLabels[cat] || cat, price,
     sale:     parseInt(document.getElementById('p-sale').value)  || 0,
     stock:    parseInt(document.getElementById('p-stock').value) || 0,
-    icon:     imageUrl ? '🖼️' : '🌸',
-    imageUrl,
+    icon:     document.getElementById('p-emoji').value,
     featured: document.getElementById('p-featured').checked,
     active:   document.getElementById('p-active').checked,
   };
@@ -1494,122 +1420,6 @@ function saveProduct() {
   closeModal('product-modal');
   renderProductsTable(products);
   renderMiniProducts();
-}
-
-// ═══ IMAGE UPLOAD ═════════════════════════════════════════════
-
-function loadCloudinaryConfig() {
-  const saved = JSON.parse(localStorage.getItem('cloudinary_cfg') || '{}');
-  if (saved.name)   document.getElementById('cloudinary-name').value   = saved.name;
-  if (saved.preset) document.getElementById('cloudinary-preset').value = saved.preset;
-}
-
-function saveCloudinaryConfig() {
-  const name   = document.getElementById('cloudinary-name').value.trim();
-  const preset = document.getElementById('cloudinary-preset').value.trim();
-  localStorage.setItem('cloudinary_cfg', JSON.stringify({ name, preset }));
-}
-
-function handleImageSelect(input) {
-  const file = input.files[0];
-  if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { toast('Ảnh quá lớn! Tối đa 5MB.', 'error'); return; }
-  processImageFile(file);
-}
-
-function dragOver(e) {
-  e.preventDefault();
-  document.getElementById('img-upload-zone').classList.add('drag-over');
-}
-function dragLeave(e) {
-  document.getElementById('img-upload-zone').classList.remove('drag-over');
-}
-function dropFile(e) {
-  e.preventDefault();
-  document.getElementById('img-upload-zone').classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (!file || !file.type.startsWith('image/')) { toast('Chỉ chấp nhận file ảnh!', 'error'); return; }
-  processImageFile(file);
-}
-
-async function processImageFile(file) {
-  // Show local preview immediately
-  const reader = new FileReader();
-  reader.onload = (e) => showPreview(e.target.result);
-  reader.readAsDataURL(file);
-
-  const cloudName   = document.getElementById('cloudinary-name').value.trim();
-  const cloudPreset = document.getElementById('cloudinary-preset').value.trim();
-
-  if (!cloudName || !cloudPreset) {
-    // No Cloudinary config → store as base64 locally (demo mode)
-    toast('⚠️ Chưa cấu hình Cloudinary — ảnh chỉ lưu tạm thời.', 'info');
-    const reader2 = new FileReader();
-    reader2.onload = (e) => {
-      document.getElementById('p-image-final').value = e.target.result;
-      document.getElementById('p-image-url').value   = '';
-    };
-    reader2.readAsDataURL(file);
-    return;
-  }
-
-  // Upload to Cloudinary
-  showUploadOverlay(true);
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', cloudPreset);
-    formData.append('folder', 'mien-spa/products');
-
-    const res  = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: 'POST', body: formData
-    });
-    const data = await res.json();
-
-    if (data.secure_url) {
-      document.getElementById('p-image-final').value = data.secure_url;
-      document.getElementById('p-image-url').value   = data.secure_url;
-      showPreview(data.secure_url);
-      toast('✅ Upload ảnh thành công!', 'success');
-    } else {
-      throw new Error(data.error?.message || 'Upload thất bại');
-    }
-  } catch (err) {
-    toast(`❌ Upload lỗi: ${err.message}`, 'error');
-  } finally {
-    showUploadOverlay(false);
-  }
-}
-
-function showPreview(src) {
-  const zone = document.getElementById('img-upload-zone');
-  zone.classList.add('has-image');
-  document.getElementById('img-placeholder').style.display = 'none';
-  document.getElementById('img-preview-wrap').style.display = 'block';
-  document.getElementById('img-preview').src = src;
-}
-
-function showUploadOverlay(show) {
-  const overlay = document.getElementById('img-upload-overlay');
-  overlay.style.display = show ? 'flex' : 'none';
-}
-
-function clearImage(e) {
-  if (e) e.stopPropagation();
-  const zone = document.getElementById('img-upload-zone');
-  zone.classList.remove('has-image');
-  document.getElementById('img-placeholder').style.display = 'block';
-  document.getElementById('img-preview-wrap').style.display = 'none';
-  document.getElementById('img-preview').src = '';
-  document.getElementById('p-image-final').value = '';
-  document.getElementById('p-image-url').value   = '';
-  document.getElementById('p-image-file').value  = '';
-}
-
-function previewFromUrl(url) {
-  if (!url) { clearImage(); return; }
-  document.getElementById('p-image-final').value = url;
-  showPreview(url);
 }
 
 function deleteProduct(id, name) {
@@ -1818,4 +1628,11 @@ function toast(msg, type = 'success') {
   }, 3000);
 }
 
-// ═══ INIT ═════════════════════════════�
+// ═══ INIT ═════════════════════════════════════════════════════
+renderMiniProducts();
+renderProductsTable(products);
+
+setTimeout(() => toast('👋 Chào mừng trở lại, Admin!', 'info'), 600);
+</script>
+</body>
+</html>

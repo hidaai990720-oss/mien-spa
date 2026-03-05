@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miền Spa — Thư Giãn Thuần Khiết</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 /* ─── RESET & BASE ───────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: var(--nav-h); }
 
 :root {
   --lav-deep:   #4A3F6B;
@@ -25,8 +25,16 @@ html { scroll-behavior: smooth; font-size: 16px; }
   --muted:      #8A819E;
   --white:      #FFFFFF;
 
-  --fnt-display: 'Cormorant', serif;
-  --fnt-body:    'Outfit', sans-serif;
+  /* Surface tokens — dùng cho card, nav, footer */
+  --bg:         #FBF9F7;
+  --surface:    #FFFFFF;
+  --surface2:   #F7F5FD;
+  --border:     #E8E4F4;
+  --text:       #2A2535;
+  --text-muted: #8A819E;
+
+  --fnt-display: 'Cormorant Garamond', serif;
+  --fnt-body:    'Nunito', sans-serif;
 
   --sp-xs:  0.5rem;
   --sp-sm:  1rem;
@@ -47,12 +55,74 @@ html { scroll-behavior: smooth; font-size: 16px; }
   --transition: 0.3s ease;
 }
 
+/* ─── DARK MODE ──────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lav-deep:   #C4B8F0;
+    --lav-mid:    #A392D4;
+    --lav-soft:   #7B6FA0;
+    --lav-pale:   #3D3560;
+    --lav-mist:   #25213A;
+    --lav-frost:  #1C1828;
+    --rose:       #D4A0B0;
+    --rose-pale:  #2A1E25;
+    --gold:       #D4B87A;
+    --cream:      #13111C;
+    --charcoal:   #E8E2F8;
+    --muted:      #8A82A8;
+    --white:      #1C1828;
+
+    --bg:         #13111C;
+    --surface:    #1C1828;
+    --surface2:   #221E32;
+    --border:     #2E2848;
+    --text:       #E8E2F8;
+    --text-muted: #8A82A8;
+
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+  }
+}
+
+/* Manual dark mode class (toggle button) */
+body.dark {
+  --lav-deep:   #C4B8F0;
+  --lav-mid:    #A392D4;
+  --lav-soft:   #7B6FA0;
+  --lav-pale:   #3D3560;
+  --lav-mist:   #25213A;
+  --lav-frost:  #1C1828;
+  --rose:       #D4A0B0;
+  --rose-pale:  #2A1E25;
+  --gold:       #D4B87A;
+  --cream:      #13111C;
+  --charcoal:   #E8E2F8;
+  --muted:      #8A82A8;
+  --white:      #1C1828;
+
+  --bg:         #13111C;
+  --surface:    #1C1828;
+  --surface2:   #221E32;
+  --border:     #2E2848;
+  --text:       #E8E2F8;
+  --text-muted: #8A82A8;
+
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+}
+
 body {
   font-family: var(--fnt-body);
   background: var(--cream);
-  color: var(--charcoal);
+  color: #3D3650;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.75;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 img { max-width: 100%; display: block; }
@@ -65,19 +135,121 @@ button { font-family: var(--fnt-body); cursor: pointer; border: none; background
 ::-webkit-scrollbar-track { background: var(--lav-frost); }
 ::-webkit-scrollbar-thumb { background: var(--lav-soft); border-radius: 10px; }
 
+/* ─── DARK MODE COMPONENTS ───────────────────────────── */
+@media (prefers-color-scheme: dark), body.dark {
+  nav.scrolled {
+    background: rgba(19,17,28,0.92) !important;
+    border-bottom-color: var(--lav-pale) !important;
+  }
+  .mobile-menu {
+    background: rgba(19,17,28,0.97) !important;
+    border-bottom-color: var(--lav-pale) !important;
+  }
+  .hero {
+    background: linear-gradient(160deg, #13111C 0%, #1C1828 60%, #221E32 100%) !important;
+  }
+  .section-services { background: var(--lav-frost) !important; }
+  .service-item:hover { background: var(--lav-mist) !important; }
+  .p-card {
+    background: var(--lav-frost) !important;
+    border-color: var(--lav-pale) !important;
+  }
+  .p-btn { background: var(--lav-mist) !important; }
+  .blog-featured, .blog-small {
+    background: var(--lav-frost) !important;
+    border-color: var(--lav-pale) !important;
+  }
+  footer { background: #0D0B14 !important; }
+  .shop-hero {
+    background: linear-gradient(135deg, #1C1828 0%, #2E2848 100%) !important;
+  }
+  .shop-sort, .sidebar-cat:hover, .sidebar-cat.active {
+    background: var(--lav-mist) !important;
+    border-color: var(--lav-pale) !important;
+  }
+  .blog-page-hero {
+    background: linear-gradient(160deg, #13111C 0%, #1C1828 100%) !important;
+  }
+  .bps-widget {
+    background: var(--lav-frost) !important;
+    border-color: var(--lav-pale) !important;
+  }
+  .tag-pill {
+    background: var(--lav-mist) !important;
+    border-color: var(--lav-pale) !important;
+  }
+  .hero-card-main {
+    background: linear-gradient(160deg, #25213A, #3D3560, #4A3F6B) !important;
+  }
+  .float-badge {
+    background: #1C1828 !important;
+    border: 1px solid var(--lav-pale);
+  }
+  .about-card:nth-child(2) { background: var(--lav-mist) !important; }
+  .about-card:nth-child(3) { background: #2A1E25 !important; }
+}
+
+/* Thêm override riêng cho body.dark (không dùng @media) */
+body.dark nav.scrolled { background: rgba(19,17,28,0.92) !important; border-bottom-color: var(--lav-pale) !important; }
+body.dark .hero { background: linear-gradient(160deg,#13111C 0%,#1C1828 60%,#221E32 100%) !important; }
+body.dark .section-services { background: var(--lav-frost) !important; }
+body.dark .service-item:hover { background: var(--lav-mist) !important; }
+body.dark .p-card { background: var(--lav-frost) !important; border-color: var(--lav-pale) !important; }
+body.dark .blog-featured, body.dark .blog-small { background: var(--lav-frost) !important; border-color: var(--lav-pale) !important; }
+body.dark footer { background: #0D0B14 !important; }
+body.dark .shop-hero { background: linear-gradient(135deg,#1C1828 0%,#2E2848 100%) !important; }
+body.dark .bps-widget { background: var(--lav-frost) !important; border-color: var(--lav-pale) !important; }
+body.dark .float-badge { background: #1C1828 !important; border: 1px solid var(--lav-pale); }
+body.dark .hero-card-main { background: linear-gradient(160deg,#25213A,#3D3560,#4A3F6B) !important; }
+body.dark .about-card:nth-child(2) { background: var(--lav-mist) !important; }
+body.dark .about-card:nth-child(3) { background: #2A1E25 !important; }
+body.dark .blog-page-hero { background: linear-gradient(160deg,#13111C 0%,#1C1828 100%) !important; }
+body.dark .tag-pill { background: var(--lav-mist) !important; border-color: var(--lav-pale) !important; }
+
+/* Dark mode wave dividers */
+body.dark .wave-divider svg path { opacity: 0.15; }
+
+/* ─── THEME TOGGLE BUTTON ────────────────────────────── */
+.theme-toggle {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--lav-pale);
+  background: var(--lav-frost);
+  color: var(--lav-mid);
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: var(--lav-mist); border-color: var(--lav-mid); }
+
 /* ─── UTILITIES ──────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 5vw, 2.5rem);
+  padding: 0 clamp(2rem, 6vw, 5rem);
 }
 
-.section { padding: clamp(3rem, 8vw, var(--sp-xl)) 0; }
+.section { padding: clamp(3rem, 7vw, 6rem) 0; }
+
+/* Wave divider giữa các section */
+.wave-divider {
+  width: 100%; overflow: hidden;
+  line-height: 0; display: block;
+  margin: 0; padding: 0;
+}
+.wave-divider svg { display: block; width: 100%; }
+
+/* Section transition mượt */
+section, .section, .marquee, footer {
+  transition: background 0.3s ease;
+}
 
 .label {
   display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+  font-size: clamp(0.65rem, 1.4vw, 0.72rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--lav-mid);
@@ -92,13 +264,13 @@ button { font-family: var(--fnt-body); cursor: pointer; border: none; background
 
 .title {
   font-family: var(--fnt-display);
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.12;
   color: var(--lav-deep);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
-.title em { font-style: italic; color: var(--lav-mid); }
+.title em { font-style: italic; color: var(--lav-mid); font-weight: 300; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 0.6rem;
@@ -228,14 +400,22 @@ nav.scrolled {
 
 /* ─── HERO ───────────────────────────────────────────── */
 .hero {
-  min-height: 100svh;
+  min-height: 88vh;
   padding-top: var(--nav-h);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
   position: relative;
   overflow: hidden;
   background: linear-gradient(160deg, var(--cream) 0%, var(--lav-frost) 60%, var(--lav-mist) 100%);
+  display: flex; align-items: center;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* Blob decorations */
@@ -259,62 +439,62 @@ nav.scrolled {
 }
 
 .hero-text {
-  padding: clamp(2rem, 5vw, 4rem) 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
   position: relative; z-index: 1;
   animation: fadeUp 0.8s ease both;
 }
 
-.hero-eyebrow { margin-bottom: 1.5rem; }
+.hero-eyebrow { margin-bottom: 1rem; }
 
 .hero-title {
   font-family: var(--fnt-display);
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
-  font-weight: 300;
-  line-height: 1.0;
+  font-size: clamp(3.2rem, 6vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.05;
   color: var(--lav-deep);
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
 }
 .hero-title strong { font-weight: 600; display: block; }
 .hero-title em { font-style: italic; color: var(--lav-mid); font-weight: 300; display: block; }
 
 .hero-desc {
-  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
   color: var(--muted);
-  line-height: 1.8;
-  max-width: 440px;
-  margin-bottom: 2.5rem;
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 2rem;
   font-weight: 300;
 }
 
-.hero-cta { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.hero-cta { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
 
 .hero-stats {
   display: flex; gap: clamp(1.5rem, 3vw, 2.5rem);
-  margin-top: clamp(2rem, 4vw, 3.5rem);
-  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--lav-pale);
 }
 .stat-item { text-align: left; }
 .stat-num {
   font-family: var(--fnt-display);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
   font-weight: 600;
   color: var(--lav-deep);
   line-height: 1;
   margin-bottom: 0.2rem;
 }
-.stat-lbl { font-size: clamp(0.65rem, 1.3vw, 0.75rem); color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.stat-lbl { font-size: clamp(0.68rem, 1.2vw, 0.78rem); color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 
 .hero-visual {
   position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center;
-  padding: clamp(1.5rem, 3vw, 3rem) 0;
+  padding: 1.5rem 0;
   animation: fadeUp 0.8s ease 0.2s both;
 }
 
 .hero-card-main {
-  width: clamp(240px, 40vw, 360px);
+  width: clamp(220px, 32vw, 320px);
   aspect-ratio: 3/4;
   background: linear-gradient(160deg, var(--lav-mist), var(--lav-pale), var(--lav-soft));
   border-radius: var(--radius-lg);
@@ -332,20 +512,20 @@ nav.scrolled {
   background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero-icon-big { font-size: clamp(4rem, 8vw, 7rem); animation: floatY 4s ease-in-out infinite; }
+.hero-icon-big { font-size: clamp(3.5rem, 6vw, 5.5rem); animation: floatY 4s ease-in-out infinite; }
 @keyframes floatY {
   0%,100% { transform: translateY(0) rotate(-2deg); }
   50%      { transform: translateY(-12px) rotate(2deg); }
 }
 .hero-card-label {
   font-family: var(--fnt-display);
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   color: rgba(74,63,107,0.8);
   font-style: italic;
   font-weight: 300;
 }
 .hero-card-sub {
-  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+  font-size: clamp(0.58rem, 1vw, 0.68rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: rgba(74,63,107,0.5);
@@ -891,13 +1071,13 @@ footer {
 
 /* Tablet (≤ 900px) */
 @media (max-width: 900px) {
-  .hero          { grid-template-columns: 1fr; text-align: center; }
-  .hero-text     { order: 2; }
-  .hero-visual   { order: 1; padding-bottom: 0; }
-  .hero-desc     { margin: 0 auto 2rem; }
-  .hero-cta      { justify-content: center; }
-  .hero-stats    { justify-content: center; }
-  .hero-card-main{ width: clamp(180px, 45vw, 260px); }
+  .hero-inner      { grid-template-columns: 1fr; text-align: center; }
+  .hero-text       { order: 2; }
+  .hero-visual     { order: 1; padding-bottom: 0; }
+  .hero-desc       { margin: 0 auto 2rem; }
+  .hero-cta        { justify-content: center; }
+  .hero-stats      { justify-content: center; }
+  .hero-card-main  { width: clamp(180px, 45vw, 260px); }
   .fb1, .fb2, .fb3 { display: none; }
 
   .about-grid    { grid-template-columns: 1fr; }
@@ -968,6 +1148,7 @@ footer {
         <li><a>Về Chúng Tôi</a></li>
       </ul>
       <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Chuyển chế độ sáng/tối">🌙</button>
         <button class="btn btn-primary" onclick="showPage('shop')" style="font-size:0.75rem;padding:0.6rem 1.4rem;">Đặt Lịch</button>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()">
           <span></span><span></span><span></span>
@@ -992,8 +1173,8 @@ footer {
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container" style="display:contents;">
-      <div class="hero-text container" style="padding-top:calc(var(--nav-h) + 2rem);">
+    <div class="hero-inner container">
+      <div class="hero-text">
         <div class="hero-eyebrow">
           <div class="label">Spa & Beauty cao cấp</div>
         </div>
@@ -1042,6 +1223,13 @@ footer {
     <div class="marquee-track" id="mtrack"></div>
   </div>
 
+  <!-- Wave: marquee → about -->
+  <div class="wave-divider" style="background:var(--cream)">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" style="height:40px">
+      <path d="M0,20 C360,40 1080,0 1440,20 L1440,0 L0,0 Z" fill="var(--lav-deep)"/>
+    </svg>
+  </div>
+
   <!-- ABOUT -->
   <section class="section">
     <div class="container">
@@ -1063,6 +1251,13 @@ footer {
     </div>
   </section>
 
+  <!-- Wave: about → services -->
+  <div class="wave-divider" style="background:var(--lav-frost)">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style="height:50px">
+      <path d="M0,25 C240,50 480,0 720,25 C960,50 1200,0 1440,25 L1440,0 L0,0 Z" fill="var(--cream)"/>
+    </svg>
+  </div>
+
   <!-- SERVICES -->
   <section class="section section-services">
     <div class="container">
@@ -1083,6 +1278,13 @@ footer {
     </div>
   </section>
 
+  <!-- Wave: services → products -->
+  <div class="wave-divider" style="background:var(--cream)">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style="height:50px">
+      <path d="M0,0 C360,50 1080,0 1440,40 L1440,50 L0,50 Z" fill="var(--lav-frost)"/>
+    </svg>
+  </div>
+
   <!-- PRODUCTS -->
   <section class="section">
     <div class="container">
@@ -1093,6 +1295,13 @@ footer {
       <div class="products-grid" id="home-products"></div>
     </div>
   </section>
+
+  <!-- Wave: products → testimonials -->
+  <div class="wave-divider" style="background:var(--lav-deep)">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style="height:50px">
+      <path d="M0,30 C360,0 1080,50 1440,20 L1440,0 L0,0 Z" fill="var(--cream)"/>
+    </svg>
+  </div>
 
   <!-- TESTIMONIALS -->
   <section class="section section-testimonials">
@@ -1106,6 +1315,13 @@ footer {
       </div>
     </div>
   </section>
+
+  <!-- Wave: testimonials → blog -->
+  <div class="wave-divider" style="background:var(--lav-frost)">
+    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style="height:50px">
+      <path d="M0,20 C480,50 960,0 1440,30 L1440,0 L0,0 Z" fill="var(--lav-deep)"/>
+    </svg>
+  </div>
 
   <!-- BLOG -->
   <section class="section" style="background:var(--lav-frost);">
@@ -1146,7 +1362,7 @@ footer {
         </div>
         <div class="footer-col"><span class="footer-col-title">Dịch Vụ</span><ul><li>Chăm sóc da mặt</li><li>Massage thư giãn</li><li>Tắm trắng Organic</li><li>Liệu trình Detox</li><li>Gói VIP trọn ngày</li></ul></div>
         <div class="footer-col"><span class="footer-col-title">Thông Tin</span><ul><li>Về chúng tôi</li><li>Blog làm đẹp</li><li>Chứng nhận hữu cơ</li><li>Chính sách bảo hành</li><li>Tuyển dụng</li></ul></div>
-        <div class="footer-col"><span class="footer-col-title">Liên Hệ</span><ul><li>📍 45 Lê Lợi, Q.1, TP.HCM</li><li>📞 0901 234 567</li><li>✉️ hello@mienspa.vn</li><li>🕐 8:00 – 21:00 hàng ngày</li></ul></div>
+        <div class="footer-col"><span class="footer-col-title">Liên Hệ</span><ul><li>📍 45 Lê Lợi, Q.1, TP.HCM</li><li>📞 0901 234 567</li><li>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4d25282121220d202428233e3d2c633b23">[email&#160;protected]</a></li><li>🕐 8:00 – 21:00 hàng ngày</li></ul></div>
       </div>
       <div class="footer-bottom">
         <span class="footer-copy">© 2025 Miền Spa & Beauty. Mọi quyền được bảo lưu.</span>
@@ -1271,7 +1487,7 @@ footer {
   🛒<span class="cart-cnt" id="cart-cnt">0</span>
 </button>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── DATA ─────────────────────────────────────────────────────
 const products = [
   {id:1, name:'Serum Hoa Hồng 24K',      cat:'duong-da', label:'Dưỡng Da',    price:450000, orig:590000, icon:'🌸', bg:'gb1', badge:'Bán chạy'},
@@ -1398,11 +1614,27 @@ window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// ── INIT ─────────────────────────────────────────────────────
-renderProducts(products.slice(0,4), 'home-products');
-renderProducts(products, 'shop-grid');
-renderBlog();
-renderMarquee();
-</script>
-</body>
-</html>
+// ── THEME TOGGLE ─────────────────────────────────────────────
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function applyTheme(dark) {
+  document.body.classList.toggle('dark', dark);
+  document.getElementById('theme-toggle').textContent = dark ? '☀️' : '🌙';
+}
+function toggleTheme() {
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  applyTheme(!isDark);
+}
+// Khởi động: ưu tiên localStorage, fallback theo browser
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  applyTheme(savedTheme === 'dark');
+} else {
+  applyTheme(prefersDark.matches);
+}
+prefersDark.addEventListener('change', e => {
+  if (!localStorage.getItem('theme')) applyTheme(e.matches);
+});
+
+// ── INIT ───────────────────────────�
