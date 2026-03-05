@@ -8,30 +8,30 @@
 <style>
 /* ─── RESET & BASE ───────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: var(--nav-h); }
+html { scroll-behavior: smooth; font-size: 17px; scroll-padding-top: var(--nav-h); }
 
 :root {
-  --lav-deep:   #4A3F6B;
-  --lav-mid:    #7B6FA0;
-  --lav-soft:   #A99DC8;
-  --lav-pale:   #D4CCEE;
-  --lav-mist:   #EDE9F8;
-  --lav-frost:  #F7F5FD;
-  --rose:       #C9A4B0;
-  --rose-pale:  #F0E4EA;
+  --lav-deep:   #3D3260;
+  --lav-mid:    #6B5F95;
+  --lav-soft:   #9B8EC0;
+  --lav-pale:   #C8BEE8;
+  --lav-mist:   #EAE5F5;
+  --lav-frost:  #F3F0FB;
+  --rose:       #C4A0AE;
+  --rose-pale:  #EDE0E8;
   --gold:       #C4A96A;
-  --cream:      #FBF9F7;
-  --charcoal:   #2A2535;
-  --muted:      #8A819E;
+  --cream:      #F5F2EE;
+  --charcoal:   #28203C;
+  --muted:      #7A7090;
   --white:      #FFFFFF;
 
-  /* Surface tokens — dùng cho card, nav, footer */
-  --bg:         #FBF9F7;
-  --surface:    #FFFFFF;
-  --surface2:   #F7F5FD;
-  --border:     #E8E4F4;
-  --text:       #2A2535;
-  --text-muted: #8A819E;
+  /* Surface tokens */
+  --bg:         #F5F2EE;
+  --surface:    #FDFCFA;
+  --surface2:   #F0ECF8;
+  --border:     #DDD7EE;
+  --text:       #28203C;
+  --text-muted: #7A7090;
 
   --fnt-display: 'Cormorant Garamond', serif;
   --fnt-body:    'Nunito', sans-serif;
@@ -58,65 +58,65 @@ html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: var(--nav-h
 /* ─── DARK MODE ──────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
   :root {
-    --lav-deep:   #C4B8F0;
-    --lav-mid:    #A392D4;
-    --lav-soft:   #7B6FA0;
-    --lav-pale:   #3D3560;
-    --lav-mist:   #25213A;
-    --lav-frost:  #1C1828;
-    --rose:       #D4A0B0;
-    --rose-pale:  #2A1E25;
-    --gold:       #D4B87A;
-    --cream:      #13111C;
-    --charcoal:   #E8E2F8;
-    --muted:      #8A82A8;
-    --white:      #1C1828;
+    --lav-deep:   #BEB2E8;
+    --lav-mid:    #9888CC;
+    --lav-soft:   #7060A0;
+    --lav-pale:   #3A3258;
+    --lav-mist:   #221E35;
+    --lav-frost:  #1A1728;
+    --rose:       #C89AAA;
+    --rose-pale:  #281820;
+    --gold:       #C8B46E;
+    --cream:      #120F1C;
+    --charcoal:   #E5DFF8;
+    --muted:      #8878A8;
+    --white:      #1A1728;
 
-    --bg:         #13111C;
-    --surface:    #1C1828;
-    --surface2:   #221E32;
-    --border:     #2E2848;
-    --text:       #E8E2F8;
-    --text-muted: #8A82A8;
+    --bg:         #120F1C;
+    --surface:    #1A1728;
+    --surface2:   #201C30;
+    --border:     #2C2845;
+    --text:       #E5DFF8;
+    --text-muted: #8878A8;
 
-    --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
-    --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
-    --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
   }
 }
 
-/* Manual dark mode class (toggle button) */
+/* Manual dark mode class */
 body.dark {
-  --lav-deep:   #C4B8F0;
-  --lav-mid:    #A392D4;
-  --lav-soft:   #7B6FA0;
-  --lav-pale:   #3D3560;
-  --lav-mist:   #25213A;
-  --lav-frost:  #1C1828;
-  --rose:       #D4A0B0;
-  --rose-pale:  #2A1E25;
-  --gold:       #D4B87A;
-  --cream:      #13111C;
-  --charcoal:   #E8E2F8;
-  --muted:      #8A82A8;
-  --white:      #1C1828;
+  --lav-deep:   #BEB2E8;
+  --lav-mid:    #9888CC;
+  --lav-soft:   #7060A0;
+  --lav-pale:   #3A3258;
+  --lav-mist:   #221E35;
+  --lav-frost:  #1A1728;
+  --rose:       #C89AAA;
+  --rose-pale:  #281820;
+  --gold:       #C8B46E;
+  --cream:      #120F1C;
+  --charcoal:   #E5DFF8;
+  --muted:      #8878A8;
+  --white:      #1A1728;
 
-  --bg:         #13111C;
-  --surface:    #1C1828;
-  --surface2:   #221E32;
-  --border:     #2E2848;
-  --text:       #E8E2F8;
-  --text-muted: #8A82A8;
+  --bg:         #120F1C;
+  --surface:    #1A1728;
+  --surface2:   #201C30;
+  --border:     #2C2845;
+  --text:       #E5DFF8;
+  --text-muted: #8878A8;
 
-  --shadow-sm: 0 2px 12px rgba(0,0,0,0.3);
-  --shadow-md: 0 8px 32px rgba(0,0,0,0.4);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
 }
 
 body {
   font-family: var(--fnt-body);
   background: var(--cream);
-  color: #3D3650;
+  color: var(--charcoal);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s, color 0.3s;
@@ -205,9 +205,11 @@ body.dark .about-card:nth-child(2) { background: var(--lav-mist) !important; }
 body.dark .about-card:nth-child(3) { background: #2A1E25 !important; }
 body.dark .blog-page-hero { background: linear-gradient(160deg,#13111C 0%,#1C1828 100%) !important; }
 body.dark .tag-pill { background: var(--lav-mist) !important; border-color: var(--lav-pale) !important; }
+body.dark .section-testimonials { background: #1A1728 !important; }
+body.dark .testi-text { color: rgba(255,255,255,0.85) !important; }
 
 /* Dark mode wave dividers */
-body.dark .wave-divider svg path { opacity: 0.15; }
+body.dark .wave-divider svg path { opacity: 0.08; }
 
 /* ─── THEME TOGGLE BUTTON ────────────────────────────── */
 .theme-toggle {
@@ -285,9 +287,14 @@ section, .section, .marquee, footer {
 }
 .btn-primary {
   background: var(--lav-deep);
-  color: var(--white);
+  color: #FFFFFF;
 }
 .btn-primary:hover { background: var(--lav-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+body.dark .btn-primary {
+  background: #7060A0;
+  color: #FFFFFF;
+}
+body.dark .btn-primary:hover { background: #8878B8; }
 
 .btn-outline {
   border: 1.5px solid var(--lav-pale);
@@ -759,8 +766,14 @@ nav.scrolled {
 .gb6 { background: linear-gradient(145deg, #F0EAF5, #DCC8EC); }
 
 /* ─── TESTIMONIALS ───────────────────────────────────── */
-.section-testimonials { background: var(--lav-deep); }
-
+.section-testimonials {
+  background: var(--lav-deep);
+}
+body.dark .section-testimonials,
+@media (prefers-color-scheme: dark) { .section-testimonials { } }
+body.dark .section-testimonials {
+  background: #1A1728 !important;
+}
 .testi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
@@ -768,24 +781,33 @@ nav.scrolled {
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 .testi-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(212,204,238,0.2);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius-md);
   padding: clamp(1.5rem, 3vw, 2rem);
   transition: all var(--transition);
 }
-.testi-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
-.testi-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1rem; }
+body.dark .testi-card {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.testi-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 1rem; }
 .testi-text {
   font-family: var(--fnt-display);
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  color: var(--lav-mist);
-  line-height: 1.7;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: rgba(255,255,255,0.88);
+  line-height: 1.75;
   font-style: italic;
   font-weight: 300;
   margin-bottom: 1.5rem;
 }
-.testi-author { font-size: 0.75rem; color: var(--lav-soft); letter-spacing: 0.1em; text-transform: uppercase; }
+.testi-author {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 /* ─── BLOG ───────────────────────────────────────────── */
 .blog-grid {
